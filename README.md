@@ -193,4 +193,21 @@ seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi$ gdown https://drive.goo
 
 Lanjut kita membaca file yang telah kita download dengan menggunakan _cat peta-ekspedisi-amba.pdf_ yang menampilkan seperti ini:
 
-![Isi file peta-ekspedisi-amba.pdf](
+![Isi file peta-ekspedisi-amba.pdf](<Assets/Soal_2/Isi file.png>)
+
+Di file tersebut terdapat link github yang bisa kita download dengan menggunakan cara clone repository seperti dibawah ini, pastikan kamu sudah memiliki paket git!:
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi$ git clone https://github.com/pocongcyber77/peta-gunung-kawi.git
+
+```
+
+Nah setelah kita download kita mendapatkan folder bernama peta-gunung-kawi didalam folder tersebut terdapat file gsxtrack.json yang isinya seperti ini:
+
+![Isi file gsx](<Assets/Soal_2/Isifilegsx.png>)
+
+Di file tersebut kita 
+
+
+
