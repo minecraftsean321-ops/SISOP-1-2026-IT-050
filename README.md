@@ -55,7 +55,7 @@ Di kode tersebut kita menyimpan char a ke dalam variabel subsoal lalu mendeleten
 
 Di soal a kita diminta untuk menghitung jumlah penumpang yang ada di dalam kereta tersebut, hal ini bisa kita lakukan dengan menggunakan kode awk seperti diatas dimana -F "," digunakan karena text di file csvnya dipisahkan oleh koma lalu kita mengeprint tabel di kolom satu {print $1} dengan pengkondisian baris lebih dari satu NR > 1 agar header tabel tidak ikut terprint. Setelah itu kita menyortir nama-nama orang yang unik in case ada yang double lalu kita hitung jumlahnya menggunakan kode wc -l. Selanjutnya output dari kode tersebut akan disalurkan ke printah getline karena awk tidak bisa langsung mengetahui apa yang terjadi di sistem linux dan menyimpannya ke variabel count sehingga bisa digunakan oleh perintah awk dan mengeluarkan output seperti ini:
 
-![Output soal_1 a](<img width="1730" height="64" alt="Screenshot 2026-03-20 142516" src="https://github.com/user-attachments/assets/9556e747-9e51-4b57-8715-9c2c09a57b9c" />)
+![Output soal_1 a](<Assets/Soal_1/Output soal_1 a>)
 
 **Soal_1 b**
 
