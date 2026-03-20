@@ -241,11 +241,13 @@ Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung 
 ```bash
 #!/bin/bash
 
-x1=112.450000
-y1=-7.920000
+x1=-7.920000
+y1=112.450000
 
-x4=112.450000
-y4=-7.937960
+
+x4=-7.937960
+y4=112.450000
+
 
 pusatx=$(echo "scale=6;  ($x1 + $x4) / 2" | bc )
 pusaty=$(echo "scale=6; ($y1 + $y4) / 2" | bc )
@@ -254,10 +256,136 @@ echo "Koordinat pusat: "
 echo "($pusatx, $pusaty)"
 
 ```
-Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
+Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 berdasarkan koordinat yang kita peroleh dari step sebelumnya, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
 
-![
+![Output nemupusaka](<Assets/Soal_2/Nemupusaka.png>)
+
+Lalu masukkan output tersebut ke file baru bernama posisipusaka.txt dengan kode dibawah ini:
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi/peta-gunung-kawi$ ./nemupusaka.sh > posisipusaka.txt
+
+```
+
+### Soal_3
+
+Penjelasan  
+
+Untuk soal_3 sendiri kita diminta untuk membuat suatu program yang dapat memanage kost yang dimiliki oleh paman amba, jadi hal pertama yang saya lakukan adalah membuat desain ascii yang menarik untuk tampilan dari program ini, disini saya menggunakan perintah figlet untuk membuat desain text ascii yang menarik digabung dengan lolcat untuk menciptakan animasi warna warni yang indah, untuk melakukan hal tersebut saya perlu untuk mendownload kedua perintah tersebut dengan kode dibawah ini:
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050$ sudo apt update
+seanarthur17@tamam~/SISOP-1-2026-IT-050$ sudo apt install figlet
+seanarthur17@tamam~/SISOP-1-2026-IT-050$ sudo apt install lolcat
+
+#Membuat text Ascii
+seanarthur17@tamam~/SISOP-1-2026-IT-050$ figlet -w 55 -f slant Kost Slebew | lolcat -a
+
+```
+
+Outputnya akan menjadi seperti ini:
+
+![]()
+
+Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
+
+```bash
+#!/bin/bash
+
+while true; do
+clear
+figlet -w 55 -f slant Kost Slebew | lolcat -a
+
+echo "===================================="
+echo "    Sistem Manajemen Kost Slebew    "
+echo "===================================="
+echo "ID | OPTION"
+echo "------------------------------------"
+echo "1 | Tambah Penghuni Baru"
+echo "2 | Hapus Penghuni"
+echo "3 | Tampilkan Daftar Penghuni"
+echo "4 | Update Status Penghuni"
+echo "5 | Cetak Laporan Keuangan"
+echo "6 | Kelola Cron (Pengingat Tagihan)"
+echo "7 | Exit Program"
+echo "===================================="
+echo "Enter option [1-7]: "
+read pilihan
+
+case $pilihan in
+1)
+        clear
+	echo "===================================="
+    echo "        TAMBAH PENGHUNI BARU        "
+	echo "===================================="
+        read -p "Masukkan Nama: " nama
+
+	while true; do
+        read -p "Masukkan Nomor Kamar: " kamar
+	#Memvalidasi agar tidak ada no kamar yang sama 
+	if grep -q "^.*,$kamar" ./data/penghuni.csv; then 
+	echo -e "\e[31m[!] Error: Kamar $kamar sudah terisi!\e[0m"
+	    else
+	break #Kamar tersedia kelaur dari loop 
+	    fi
+	done
+
+	while true; do
+	read -p "Masukkan Harga Sewa: " sewa
+	if [[ "$sewa" =~ ^[0-9]+$ ]] && [[ "$sewa" -gt 0 ]]; then
+	break
+	else
+	   echo -e "\e[31[!] Error: Harga sewa harus berupa angka positif!\e[0m"
+	   fi
+	done
+
+	while true; do
+	read -p "Masukkan Tanggal Masuk (YYYY-MM-DD): " tanggal
+
+	detik_input=$(date -d "$tanggal" +%s)
+    detik_sekarang=$(date +%s)
+
+	#Memastikan tanggal sesuai format
+	if date -d "$tanggal" "+%Y-%m-%d" >/dev/null 2>&1; then
+	
+	#Memastikan tanggal tidak melewati hari ini
+        if [ "$detik_input" -gt "$detik_sekarang" ]; then
+        echo -e "\e[31m[!] Error: Tanggal tidak boleh melebihi hari ini!\e[0m"
+
+	else
+		break
+	fi
+
+	else
+	 #Jika dari awal formatnya salah
+	 echo -e "\e[31m[!] Error: Format tanggal salah! Gunakan YYYY-MM-DD\e[0m"
+	fi
+
+	done
 
 
+        read -p "Masukkan Status Awal (Aktif/Menunggak): " status
+
+	echo "$nama,$kamar,$tanggal,$sewa,$status" >> ./data/penghuni.csv
+
+	# Menampilkan hasil dengan warna hijau (kode \e[32m)
+        echo -e "\e[32m[✓] Penghuni \"$nama\" berhasil ditambahkan ke Kamar \"$kamar\" dengan status \"$status\"\e[0m"
+
+            echo "Tekan [ENTER] untuk kembali ke menu"
+            read # Menunggu user menekan enter
+            ;;
+
+```
+Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan terus mengeloop sampai user menginput angka 7 yaitu exit, di tampilan awal tersebut saya juga menggunakan text ascii menggunakan figlet dan lolcat seperti yang telah saya jelaskan diatas, untuk mendapatkan input dari user saya menggunakan perintah read -p karena selain saya bisa mendapat input dari user saya juga dapat mengeluarkan output secara bersamaan, untuk pengkondisian agar tidak ada nomor kamar yang sama saya menggunakan perintah grep -q lalu mengecek apakah ada nomor kamar yang sama seperti yang diinputkan oleh user di file penghuni.csv yang berfungsi sebagai database tempat menyimpan data-data dari penghuni kost. Lalu jika ternyata kamar telah terisi maka program akan secara otomatis memberi peringatan dengan warna teks merah karena saya menggunakan _\e[31m_. Untuk pengkondisian selanjutnya yaitu harga sewa harus positif saya menggunakan perintah if untuk mengecek apakah angka yang diinput oleh user melebihi 0 dan merupakan angka dari 1-9. Setelah itu untuk pengkondisian tanggal saya menggukan perintah bawaan dari linux yaitu date yang dapat mengecek format dari tanggal dan mengecek apakah tanggal melebihi hari ini. Setelah itu saya memasukkan data-data tadi kedalam file penghuni.csv dan menampilkan hasil dengan warna hijau.
+
+Output tampilan awal:
+
+
+Output dari fitur pertama create:
+
+
+Jika input salah:
 
 
