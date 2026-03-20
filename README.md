@@ -258,7 +258,19 @@ echo "($pusatx, $pusaty)"
 ```
 Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 berdasarkan koordinat yang kita peroleh dari step sebelumnya, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
 
-![
+![Output nemupusaka](<Assets/Soal_2/Nemupusaka.png>)
+
+Lalu masukkan output tersebut ke file baru bernama posisipusaka.txt dengan kode dibawah ini:
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi/peta-gunung-kawi$ ./nemupusaka.sh > posisipusaka.txt
+
+```
+
+### Soal_3
+
+
 
 
 
