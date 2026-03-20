@@ -55,7 +55,7 @@ Di kode tersebut kita menyimpan char a ke dalam variabel subsoal lalu mendeleten
 
 Di soal a kita diminta untuk menghitung jumlah penumpang yang ada di dalam kereta tersebut, hal ini bisa kita lakukan dengan menggunakan kode awk seperti diatas dimana -F "," digunakan karena text di file csvnya dipisahkan oleh koma lalu kita mengeprint tabel di kolom satu {print $1} dengan pengkondisian baris lebih dari satu NR > 1 agar header tabel tidak ikut terprint. Setelah itu kita menyortir nama-nama orang yang unik in case ada yang double lalu kita hitung jumlahnya menggunakan kode wc -l. Selanjutnya output dari kode tersebut akan disalurkan ke printah getline karena awk tidak bisa langsung mengetahui apa yang terjadi di sistem linux dan menyimpannya ke variabel count sehingga bisa digunakan oleh perintah awk dan mengeluarkan output seperti ini:
 
-![Output soal_1 a](<Assets/Soal_1/Output soal_1 a>)
+![Output soal_1 a](<Assets/Soal_1/Output soal_1 a.png>)
 
 **Soal_1 b**
 
@@ -78,6 +78,8 @@ close(command)
 ```
 
 Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga terjadi duplikasi lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
+
+![Output soal_1 b](<Assets/Soal_1/Output soal_1 b.png>)
 
 **Soal_1 c**
 
@@ -102,6 +104,8 @@ close(command)
 ```
 Disitu saya membagi command menjadi dua yaitu comamnd_usia untuk mencari usia yang paling tua dan command_nama untuk mencari nama dari orang yang memiliki usia tertua. Jadi untuk command_usia perintah awk kan mengeprint kolom ke dua dari file passenger.csv dan mengurutkan usianya dari yang paling tinggi ke rendah menggunakan perintah sort -rn setelah itu saya mengambil output teratas yaitu angka tertinggi dengan kode head -1. Setelah saya dapat usia tertua saya dapat mencari nama dari orang yang memiliki usia tersebut dengan command_nama. Output dari kode tersebut adalah sebagai berikut:
 
+![Output soal_1 c](<Assets/Soal_1/Output soal_1 c.png>)
+
 **Soal_1 d**
 
 Di soal_1 d kita disuruh untuk menghitung rata-rata dari usia penumpang yang ada di kereta tersebut dengan outputnya dibulatkan sehingga bukan angka desimal.
@@ -122,6 +126,8 @@ close(command)
 
 ```
 Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari usia penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _\".0f\\n"_. Output dari kode diatas adalah sebagai berikut:  
+
+![Output soal_1 d](<Assets/Soal_1/Output soal_1 d.png>)
 
 **Soal_1 e**
 Di soal_1 e kita diminta untuk menghitung jumlah penumpang yang menggunakan business class, hal tersebut bisa kita lakukan dengan menggunakan kode dibawah ini:
@@ -144,6 +150,8 @@ close(command)
 
 Jadi kode diatas menggunakan perintah awk untuk mencari kata __Business__ di file passenger.csv dan menghitungnya. Output dari kode diatas adalah sebagai berikut: 
 
+![Output soal_1 e](<Assets/Soal_1/Output soal_1 e.png>)
+
 Terakhir di Soal_1 kita diminta untuk memberikan output jika user salah menginput soal.
 
 ```bash
@@ -161,6 +169,6 @@ close(command)
 
 Hasil dari kode diatas adalah sebagai berikut:
 
-
+![Output soal_1 salah input](<Assets/Soal_1/Output salah input.png>)
 
 ### Soal_2
