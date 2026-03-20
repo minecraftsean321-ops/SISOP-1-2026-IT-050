@@ -126,7 +126,7 @@ case $pilihan in
 	echo "[i] Data telah dipindahkan ke history_hapus.csv"
 
 	else
-	echo "Pembatalan penghapusan!"
+	echo -e  "\e[31mPembatalan penghapusan!\e[0m"
 	    fi
 
 	fi
