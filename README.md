@@ -287,7 +287,7 @@ seanarthur17@tamam~/SISOP-1-2026-IT-050$ figlet -w 55 -f slant Kost Slebew | lol
 
 Outputnya akan menjadi seperti ini:
 
-![]()
+![Desain Text](<Assets/Soal_3/Kost_Slebew.png>)
 
 Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
 
@@ -382,15 +382,15 @@ Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan t
 
 Output tampilan awal:
 
-![Tampilan awal](<Assets/Soal_2/Tampilan awal.png>)
+![Tampilan awal](<Assets/Soal_3/Tampilan awal.png>)
 
 Output dari fitur pertama create:
 
-![Benar](<Assets/Soal_2/JikaInputBenar.png>)
+![Benar](<Assets/Soal_3/JikaInputBenar.png>)
 
 Jika input salah:
 
-![Salah](<Assets/Soal_2/JikaInputSalah.png>)
+![Salah](<Assets/Soal_3/JikaInputSalah.png>)
 
 Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya menggunakan kode dibawah ini:
 
@@ -439,6 +439,12 @@ Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya m
 
 ```
 Jadi diawal kode saya mengecek apakah inputan nama dari user ada dalam file penghuni.csv jika tidak ada maka akan diberi peringatan jika ada maka akan muncul _Namap penghuni ditemukan_ disitu saya juga menambahkan fitur two step verification dengan menyakan user apakah yakin ingin menghapus data penghuni tersebut. Dikode tersebut saya menyimpan semua data dari penghuni yang akan dihapus didalam variabel data_penghuni agar saya bisa menyimpannya di file history_hapus.csv sebelum itu saya juga sudah mencatat tanggal penghuni tersebut keluar dengan dengan perintah date. Selanjutnya saya menghapus data dari penghuni tersebut di file penghuni.csv menggunakan perintah sed jika berhasil akan keluar output berupa nama dari penghuni telah keluar tgl_keluar berwarna hijau. Outputnya kurang lebih seperti ini:
+
+![Berhasil Hapus](<Assets/Soal_3/BerhasilHapus.png>)
+
+Jika dibatalkan:
+
+![Batal Hapus](<Assets/Soal_3/BatalHapus.png>)
 
 
 
