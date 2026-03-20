@@ -55,7 +55,7 @@ case $pilihan in
 	if [[ "$sewa" =~ ^[0-9]+$ ]] && [[ "$sewa" -gt 0 ]]; then
 	break
 	else
-	   echo -e "\e[31[!] Error: Harga sewa harus berupa angka positif!\e[0m"
+	   echo -e "\e[31m[!] Error: Harga sewa harus berupa angka positif!\e[0m"
 	   fi
 	done
 
