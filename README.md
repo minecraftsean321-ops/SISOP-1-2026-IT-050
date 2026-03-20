@@ -236,7 +236,27 @@ Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu ko
 
 ![Output kode di titik-penting](<Assets/Soal_2/Titikpenting.png>)
 
+Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung titik tengah dari koordinat yang telah kita dapatkan, hal ini bisa dilakukan dengan menggunakan metode titik simetri diagonal, yaitu menghitung titik tengah dari dua koordinat yang saling berseberangan. Disini saya membuat file scripth lagi bernama _nemupusaka.sh_ yang memiliki kode seperti dibawah ini:
 
+```bash
+#!/bin/bash
+
+x1=112.450000
+y1=-7.920000
+
+x4=112.450000
+y4=-7.937960
+
+pusatx=$(echo "scale=6;  ($x1 + $x4) / 2" | bc )
+pusaty=$(echo "scale=6; ($y1 + $y4) / 2" | bc )
+
+echo "Koordinat pusat: "
+echo "($pusatx, $pusaty)"
+
+```
+Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
+
+![
 
 
 
