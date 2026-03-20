@@ -382,10 +382,63 @@ Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan t
 
 Output tampilan awal:
 
+![Tampilan awal](<Assets/Soal_2/Tampilan awal.png>)
 
 Output dari fitur pertama create:
 
+![Benar](<Assets/Soal_2/JikaInputBenar.png>)
 
 Jika input salah:
+
+![Salah](<Assets/Soal_2/JikaInputSalah.png>)
+
+Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya menggunakan kode dibawah ini:
+
+```bash
+2)
+	clear
+	echo "===================================="
+	echo "           HAPUS PENGHUNI           "
+        echo "===================================="
+	read -p "Masukkan nama penghuni yang akan dihapus: " hapusnama
+
+	if ! grep -q "$hapusnama" ./data/penghuni.csv; then 
+	echo "\e[31m[!] Error: Nama penghuni tidak ditemukan \e[0m"
+
+	else 
+	
+	data_penghuni=$(grep "$hapusnama" ./data/penghuni.csv)
+	
+	echo "Nama penghuni ditemukan!"
+	read -p "Yakin ingin menghapus? (y/n): " konfirmasi
+
+	if [[ "$konfirmasi" == "Y" || "$konfirmasi" == "y" ]]; then 
+	
+	#menentukan tanggal keluar 
+	tgl_keluar=$(date "+%Y-%m-%d")
+
+	#simpan ke history_hapur
+	echo "$data_penghuni, $tgl_keluar" > ./sampah/history_hapus.csv
+
+	#hapus dari database utama
+	sed -i "/$hapusnama/d" ./data/penghuni.csv
+
+	echo -e "\n\e[32m[✓] $hapusnama telah keluar pada $tgl_keluar.\e[0m"
+	echo "[i] Data telah dipindahkan ke history_hapus.csv"
+
+	else
+	echo "Pembatalan penghapusan!"
+	    fi
+
+	fi
+
+	echo "Tekan [ENTER] untuk kembali ke menu"
+        read # Menunggu user menekan enter
+	;;
+
+
+```
+Jadi diawal kode saya mengecek apakah inputan nama dari user ada dalam file penghuni.csv jika tidak ada maka akan diberi peringatan jika ada maka akan muncul _Namap penghuni ditemukan_ disitu saya juga menambahkan fitur two step verification dengan menyakan user apakah yakin ingin menghapus data penghuni tersebut. Dikode tersebut saya menyimpan semua data dari penghuni yang akan dihapus didalam variabel data_penghuni agar saya bisa menyimpannya di file history_hapus.csv sebelum itu saya juga sudah mencatat tanggal penghuni tersebut keluar dengan dengan perintah date. Selanjutnya saya menghapus data dari penghuni tersebut di file penghuni.csv menggunakan perintah sed jika berhasil akan keluar output berupa nama dari penghuni telah keluar tgl_keluar berwarna hijau. Outputnya kurang lebih seperti ini:
+
 
 
