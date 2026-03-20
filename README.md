@@ -234,7 +234,7 @@ sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {pr
 ```
 Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk, semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu kita bisa menggunakan perintah seperti ini _./parserkoordinat.sh gsxtrack.json > titik-penting.txt_ dan output dari kode tersebut adalah sebagai berikut:
 
-
+![Output kode di titik-penting](<Assets/Soal_2/Titikpenting.png>)
 
 
 
