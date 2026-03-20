@@ -21,7 +21,7 @@ Setelah itu kita bisa menlajutkan dengan membuat file scripth bernama KANJ.sh se
 seanarthur17@tamam~$: nano KANJ.sh
 
 ```
-Kemudian kita membuat kode didalam file KANJ.sh agar bisa mengakses file dengan perintah awk -f KANJ.sh passengger.csv (a/b/c/d/e) dengan menggunakan variabel dan petintah if else:
+Kemudian kita membuat kode didalam file KANJ.sh agar bisa mengakses file dengan perintah awk -f KANJ.sh passengger.csv (a/b/c/d/e) dengan menggunakan variabel dan perintah if else seperti berikut:
 
 ```bash
 #!/bin/bash
