@@ -446,5 +446,35 @@ Jika dibatalkan:
 
 ![Batal Hapus](<Assets/Soal_3/BatalHapus.png>)
 
+Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dengan bentuk tabel, yang kodenya seperti ini:
+
+```bash
+3)
+	clear
+	echo "============================================================="
+	echo "                  DAFTAR PENGHUNI KOS SLEBEW                 "
+	echo "============================================================="
+	echo -e "No | Nama            | Kamar | Harga Sewa     | Status   |"
+	echo "-------------------------------------------------------------"
+
+	awk -F "," 'NR>0 {printf "%d | %s          |  %s  | %s       | %s |\n", NR, $1, $2, $4, $5}' ./data/penghuni.csv | column -t -s "|" -o " | "
+	echo "--------------------------------------------------------------"
+	penghuni=$(awk 'END {print NR}' ./data/penghuni.csv)
+	Aktif=$(awk -F "," ' $5 ~ /Aktif/ {count++} END {print count+0}' ./data/penghuni.csv)
+	Menunggak=$(awk -F "," '$5 ~ /Menunggak/ {count++} END {print count+0}' ./data/penghuni.csv)
+	echo -e "Total: $penghuni penghuni | Aktif: \e[32m$Aktif\e[0m  | Menunggak: \e[31m$Menunggak\e[0m"
+ 	echo "============================================================="
+	echo "Tekan [ENTER] untuk kembali ke menu"
+        read # Menunggu user menekan enter
+        ;;
+
+```
+
+Jadi di kode tersebut saya mengambil data-data yang ada di penghuni.csv menggunakan awk lalu menggabungkannya dengan pipe ke perintah column agar tabel akan secara otomatis mengikuti panjang data yang diambil dari file penghuni.csv. Setelah itu saya membuat variabel penghuni, Aktif dan Menunggak untuk menghitung total jumlah dari masing-masing aspek tersebut menggunakan awk, saya juga menggunakan warna hijau untuk output dari aktif dan warna merah untuk ouput dari menunggak. Output untuk kode tersebut adalah sebagai berikut:
+
+![Output fitur 3](<Assets/Soal_3/OutputFile3.png>)
+
+
+
 
 
