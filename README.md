@@ -59,7 +59,42 @@ Lanjut ke soal b kita disuruh untuk menghitung jumlah gerbong yang ada di kereta
 
 ```bash
 
+} else if (subsoal == "b") {
 
+command="awk -F \",\" 'NR > 1 {print $4}' passenger.csv | sort | uniq | wc -l"
+
+if((command | getline count) > 0) {
+
+print "Jumlah gerbong penumpang KANJ adalah "count""
+
+}
+
+close(command)
+
+```
+
+Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga terjadi duplikasi lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
+
+Kemudian kita ke soal c dimana kita disuruh untuk mencari nama dan umur dari orang tertua di kereta tersebut, kita bisa menemukannya dengan kode dibawah ini:
+
+```bash
+
+} else if (subsoal == "c") {
+
+command_usia="awk -F \",\" '{print $2}' passenger.csv | sort -rn | head -1"
+command_nama="awk -F \",\" '/85/ {print $1}' passenger.csv"
+
+if((command_usia | getline usia) > 0 && (command_nama | getline nama) > 0) {
+
+
+print nama  " adalah penumpang tertua dengan usia " usia " tahun"
+
+}
+
+close(command)
+
+```
+Disitu saya membagi command menjadi dua yaitu comamnd_usia untuk mencari usia yang paling tua dan command_nama untuk mencari nama dari orang yang memiliki usia tertua. Jadi untuk command_usia perintah awk kan mengeprint kolom ke dua dari file passenger.csv dan mengurutkan usianya dari yang paling tinggi ke rendah menggunakan perintah sort -rn setelah itu saya mengambil output teratas yaitu angka tertinggi dengan kode head -1. Setelah saya dapat usia tertua saya dapat mencari nama dari orang yang memiliki usia tersebut dengan command_nama. Output dari kode tersebut adalah sebagai berikut:
 
 
 
