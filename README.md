@@ -294,6 +294,18 @@ Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menamb
 ```bash
 #!/bin/bash
 
+if [[ "$1" == "--check-tagihan" ]]; then 
+
+tgl_rekap=$(date "+%Y-%m-%d %H:%M")
+
+awk -F "," -v tgl="$tgl_rekap" '$5 ~ /Menunggak/ {
+	printf "[/%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' 
+./data/penghuni.csv >> ./log/tagihan.log
+
+exit 0
+
+fi
+
 while true; do
 clear
 figlet -w 55 -f slant Kost Slebew | lolcat -a
@@ -316,7 +328,7 @@ read pilihan
 
 case $pilihan in
 1)
-        clear
+    clear
 	echo "===================================="
     echo "        TAMBAH PENGHUNI BARU        "
 	echo "===================================="
@@ -337,7 +349,7 @@ case $pilihan in
 	if [[ "$sewa" =~ ^[0-9]+$ ]] && [[ "$sewa" -gt 0 ]]; then
 	break
 	else
-	   echo -e "\e[31[!] Error: Harga sewa harus berupa angka positif!\e[0m"
+	   echo -e "\e[31m[!] Error: Harga sewa harus berupa angka positif!\e[0m"
 	   fi
 	done
 
@@ -345,7 +357,7 @@ case $pilihan in
 	read -p "Masukkan Tanggal Masuk (YYYY-MM-DD): " tanggal
 
 	detik_input=$(date -d "$tanggal" +%s)
-    detik_sekarang=$(date +%s)
+        detik_sekarang=$(date +%s)
 
 	#Memastikan tanggal sesuai format
 	if date -d "$tanggal" "+%Y-%m-%d" >/dev/null 2>&1; then
@@ -399,7 +411,7 @@ Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya m
 	clear
 	echo "===================================="
 	echo "           HAPUS PENGHUNI           "
-        echo "===================================="
+    echo "===================================="
 	read -p "Masukkan nama penghuni yang akan dihapus: " hapusnama
 
 	if ! grep -q "$hapusnama" ./data/penghuni.csv; then 
@@ -427,7 +439,7 @@ Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya m
 	echo "[i] Data telah dipindahkan ke history_hapus.csv"
 
 	else
-	echo "Pembatalan penghapusan!"
+	echo -e  "\e[31mPembatalan penghapusan!\e[0m"
 	    fi
 
 	fi
@@ -472,7 +484,50 @@ Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dengan bentuk t
 
 Jadi di kode tersebut saya mengambil data-data yang ada di penghuni.csv menggunakan awk lalu menggabungkannya dengan pipe ke perintah column agar tabel akan secara otomatis mengikuti panjang data yang diambil dari file penghuni.csv. Setelah itu saya membuat variabel penghuni, Aktif dan Menunggak untuk menghitung total jumlah dari masing-masing aspek tersebut menggunakan awk, saya juga menggunakan warna hijau untuk output dari aktif dan warna merah untuk ouput dari menunggak. Output untuk kode tersebut adalah sebagai berikut:
 
+![Output fitur 3](<Assets/Soal_3/OutputFitur3.png>)
 
+**Fitur 4**
+
+Untuk fitur ke 4 kita diminta untuk membuat sebuah fitur yang dapat merubah status dari penghuni, untuk menyelesaikan permasalahaan tersebut saya menggunakan kode seperti dibawah ini:
+
+```bash
+4)
+	clear
+	echo "===================================="
+    echo "            UPDATE STATUS           "
+    echo "===================================="
+	read -p "Masukkan Nama Penghuni: " namabaru
+	if grep -q "$namabaru" ./data/penghuni.csv; then
+	awk -F "," -v nama=$namabaru '$1 ~ nama {printf "%s     | %s |%s   | %s \n", $1, $2, $4, $5}' ./data/penghuni.csv | column -t -s "|" -o " | "
+	echo "------------------------------------"
+	read -p "Masukkan Status Baru (Aktif/Menunggak): " statusbaru
+	if [ "$statusbaru" == "Aktif" ]; then
+	sed -i "/$namabaru/s/Menunggak/Aktif/" ./data/penghuni.csv
+	elif [ "$statusbaru" == "Menunggak" ]; then
+	sed -i "/$namabaru/s/Aktif/Menunggak/" ./data/penghuni.csv
+	echo -e "\e[32m[✓] Status \"$namabaru\" berhasil diubah menjadi: \"$statusbaru\"\e[0m"
+	else 
+	echo -e "\e[31m[!] Error: Input Status Salah!\e[0m"
+	
+	fi
+
+	else
+	echo -e "\e[31m[!] Error: Nama Penghuni Tidak Ditemukan!\e[0m"
+	
+	fi
+	
+	echo "Tekan [ENTER] untuk kembali ke menu"
+        read # Menunggu user menekan enter
+        
+;;	
+
+```
+
+Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daftar penghuni.csv jika ada maka saya akan menampilkan data yang dimiliki oleh nama tersebut menggunakan perintah awk, setelah itu saya menggunakan perintah sed untuk mengubah yang awalnya Menunggak menjadi Aktif dan yang awalnya Aktif dapat menjadi Menunggak dengan pengkondisian if, jika inputan dari user tidak sesuai maka akan muncul peringatan Input Status Salah dan jika nama yang user inputan tidak ada di file penghuni.csv maka akan muncul peringatan juga yang berbunyi Nama Penghuni Tidak Ditemukan. Output dari kode diatas adalah sebagai berikut:
+
+![OutputFitur4]()
+
+**Fitur 5**
 
 
 
