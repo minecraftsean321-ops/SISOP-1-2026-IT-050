@@ -11,14 +11,14 @@ Untuk langkah pertama kita perlu untuk mendownload file passenger.csv menggunaka
 
 ```console
 
-seanarthur17@tamam~$: wget -O passenger.csv https://docs.google.com/spreadsheets/d/1NHmyS6wRO7To7ta-NLOOLHkPS6valvNaX7tawsv1zfE/export?format=csv&gid=0
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_1$ wget -O passenger.csv https://docs.google.com/spreadsheets/d/1NHmyS6wRO7To7ta-NLOOLHkPS6valvNaX7tawsv1zfE/export?format=csv&gid=0
 
 ```
 Setelah itu kita bisa menlajutkan dengan membuat file scripth bernama KANJ.sh sesuai dengan contoh struktur repository yang diberikan.
 
 ```console
 
-seanarthur17@tamam~$: nano KANJ.sh
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_1$ nano KANJ.sh
 
 ```
 Kemudian kita membuat kode didalam file KANJ.sh agar bisa mengakses file dengan perintah awk -f KANJ.sh passengger.csv (a/b/c/d/e) dengan menggunakan variabel dan perintah if else seperti berikut:
@@ -172,3 +172,25 @@ Hasil dari kode diatas adalah sebagai berikut:
 ![Output soal_1 salah input](<Assets/Soal_1/Output salah input.png>)
 
 ### Soal_2
+
+Penjelasan
+
+Untuk langkah pertama menyelesaikan Soal_2 kita perlu memyiapkan semua peralatan yang diperlukan yang pertama itu gdown kita bisa menggunakan kode dibawah ini: 
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050$ sudo pip install gdown
+
+```
+
+Setelah itu kita bisa download file dari google drive yang bernama peta-ekspedisi-amba.pdf ke folder ekspedsi yang telah kita buat di soal_2.
+
+```console
+
+seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi$ gdown https://drive.google.com/uc?id=1q10pHSC3KFfvEiCN3V6PTroPR7YGHF6Q
+
+```
+
+Lanjut kita membaca file yang telah kita download dengan menggunakan _cat peta-ekspedisi-amba.pdf_ yang menampilkan seperti ini:
+
+![Isi file peta-ekspedisi-amba.pdf](
