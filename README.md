@@ -39,6 +39,7 @@ if(subsoal == "a") {
 command="awk -F \",\" 'NR > 1 {print $1}' passenger.csv | sort | uniq | wc -l"
 
 
+
 if((command | getline count) > 0) {
 
 print "Jumlah seluruh penumpang KANJ adalah "count" orang"
@@ -49,4 +50,6 @@ close(command)
 
 ```
 Di kode tersebut kita menyimpan char a ke dalam variabel subsoal lalu mendeletenya agar perintah awk tidak menganggapnya sebagai suatu file, sehingga kita bisa melakukan pengkondisian jika subsoal a maka akan menjalankan perintah dalam if setelah itu hasil dari perintah awk tersebut akan disimpan ke variabel count melalui getline dan di print menghasilkan output seperti berikut:
+
+![Output soal_1 a](<img width="1730" height="64" alt="Screenshot 2026-03-20 142516" src="https://github.com/user-attachments/assets/9556e747-9e51-4b57-8715-9c2c09a57b9c" />)
 
