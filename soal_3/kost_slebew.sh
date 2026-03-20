@@ -167,6 +167,7 @@ case $pilihan in
 	sed -i "/$namabaru/s/Menunggak/Aktif/" ./data/penghuni.csv
 	elif [ "$statusbaru" == "Menunggak" ]; then
 	sed -i "/$namabaru/s/Aktif/Menunggak/" ./data/penghuni.csv
+	echo -e "\e[32m[✓] Status \"$namabaru\" berhasil diubah menjadi: \"$statusbaru\"\e[0m"
 	else 
 	echo -e "\e[31m[!] Error: Input Status Salah!\e[0m"
 	
@@ -176,8 +177,6 @@ case $pilihan in
 	echo -e "\e[31m[!] Error: Nama Penghuni Tidak Ditemukan!\e[0m"
 	
 	fi
-
-	echo -e "\e[32m[✓] Status \"$namabaru\" berhasil diubah menjadi: \"$statusbaru\"\e[0m"
 	
 	echo "Tekan [ENTER] untuk kembali ke menu"
         read # Menunggu user menekan enter
