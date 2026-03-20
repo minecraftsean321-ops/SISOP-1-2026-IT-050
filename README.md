@@ -209,6 +209,32 @@ Nah setelah kita download kita mendapatkan folder bernama peta-gunung-kawi didal
 
 Di file tersebut terdapat data-data berupa site_name, latitude, dan longitude yang perlu kita ambil dan masukkan ke dalam file titik-penting.txt kita dapat melakukan tersebut dengan membuat file scripth bernama parserkoordinat.sh dan membuat perintah seperti dibawah ini: 
 
+```bash
+#!/bin/bash
+
+if [ -z "$1" ]; then 
+	echo "Penggunaan: ./nama_file.sh nama_file.json"
+	exit 1
+fi
+
+FILE_JSON=$1
+
+#untuk node 001
+sed -n '12,22p' "$FILE_JSON" | awk -F ":" ' {gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+
+#untuk node 002
+sed -n '28,38p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+
+#untuk node 003
+sed -n '44,54p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+
+#untuk node 004
+sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+
+```
+Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk, semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Output dari kode tersebut adalah sebagai berikut:
+
+
 
 
 
