@@ -207,7 +207,9 @@ Nah setelah kita download kita mendapatkan folder bernama peta-gunung-kawi didal
 
 ![Isi file gsx](<Assets/Soal_2/Isifilegsx.png>)
 
-Di file tersebut kita 
+Di file tersebut terdapat data-data berupa site_name, latitude, dan longitude yang perlu kita ambil dan masukkan ke dalam file titik-penting.txt kita dapat melakukan tersebut dengan membuat file scripth bernama parserkoordinat.sh dan membuat perintah seperti dibawah ini: 
+
+
 
 
 
