@@ -382,10 +382,14 @@ Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan t
 
 Output tampilan awal:
 
+![Tampilan awal](<Assets/Soal_2/Tampilan awal.png>)
 
 Output dari fitur pertama create:
 
+![Benar](<Assets/Soal_2/JikaInputBenar.png>)
 
 Jika input salah:
+
+![Salah](<Assets/Soal_2/JikaInputSalah.png>)
 
 
