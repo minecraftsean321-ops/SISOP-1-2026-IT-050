@@ -241,11 +241,13 @@ Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung 
 ```bash
 #!/bin/bash
 
-x1=112.450000
-y1=-7.920000
+x1=-7.920000
+y1=112.450000
 
-x4=112.450000
-y4=-7.937960
+
+x4=-7.937960
+y4=112.450000
+
 
 pusatx=$(echo "scale=6;  ($x1 + $x4) / 2" | bc )
 pusaty=$(echo "scale=6; ($y1 + $y4) / 2" | bc )
@@ -254,7 +256,7 @@ echo "Koordinat pusat: "
 echo "($pusatx, $pusaty)"
 
 ```
-Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
+Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 berdasarkan koordinat yang kita peroleh dari step sebelumnya, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
 
 ![
 
