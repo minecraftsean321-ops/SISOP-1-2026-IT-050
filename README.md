@@ -525,7 +525,11 @@ Untuk fitur ke 4 kita diminta untuk membuat sebuah fitur yang dapat merubah stat
 
 Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daftar penghuni.csv jika ada maka saya akan menampilkan data yang dimiliki oleh nama tersebut menggunakan perintah awk, setelah itu saya menggunakan perintah sed untuk mengubah yang awalnya Menunggak menjadi Aktif dan yang awalnya Aktif dapat menjadi Menunggak dengan pengkondisian if, jika inputan dari user tidak sesuai maka akan muncul peringatan Input Status Salah dan jika nama yang user inputan tidak ada di file penghuni.csv maka akan muncul peringatan juga yang berbunyi Nama Penghuni Tidak Ditemukan. Output dari kode diatas adalah sebagai berikut:
 
-![OutputFitur4]()
+![OutputFitur4](<Assets/Soal_3/Outputfitur4b.png>)
+
+Jika salah:
+
+![Output4jikasalah](<Assets/Soal_3/Outputfitur4l.png>)
 
 **Fitur 5**
 Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan secara otomatis menghitung ketika ada penghuni yang memiliki status aktif akan masuk ke kategori pemasukan jika status penghuni menunggak akan secara otomatis masuk ke kategori tunggakan. 
@@ -566,7 +570,7 @@ Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan se
 Di kode tersebut saya memulai dengan mengecek apakah data penghuni kosong atau tidak menggunakan if _-s_ jika kososng akan memberikan peringatan berwarna merah, setelah itu saya membuat variabel bernama pemasukan, tunggakan dan jumterisi, untuk variabel pemasukan dia akan mencari kata Aktif dan akan menjumlahkan kolom ke 4 yaitu harga sewa di baris yang terdapat kata aktif lalu hasilnya akan berupa jumlah pemasukan yang dimiliki paman amba setelah itu untuk variabel tunggakan kurang lebih sama dengan pemasukan yaitu mencari kata Menunggak di file penghuni.csv lalu menjumlahkan kolom ke 4 dari baris tersebut sehingga hasilnya berupa total jumlah tunggakan. Karena di fitur ke lima kita juga diminta untuk mencari tahu jumlah kamar terisi di situ saya mengunakan awk untuk menghitung baris dari file penghuni.csv yang akan secara otomatis menghitung jumlah kamar yang terisi juga karena satu penghuni hanya memiliki satu kamar. Selanjutnya saya juga menginisialisasi tanggal rekap tersebut menggunakan perintah date lalu saya gabungkan semua variabel tersebut ke dalam output rekap dan memasukkannya ke ./rekap/laporan_bulanan.txt.
 Hasilnya kurang lebih seperti ini:
 
-![]()
+![Output Fitur 5](<Assets/Soal_3/Outputfitur5.png>)
 
 **Fitur 6**
 Di fitur ke 6 ini kita diminta untuk membuat fitur yang dapat mengelola cron seperti mendaftarkan cron job lalu melihat daftar cron job dan terkahir menghapus cron job. Fitur ini harus bisa looping sehingga user dapat memilih opsi yang lain setelah melakukan opsi saat ini lalu untuk memanggil scripth juga perlu menggunakan argumen ./kost_slebew.sh --check-tagihan. Untuk melakukan semua tugas tersebut saya menggunakan tugas dibawah ini:
@@ -633,5 +637,20 @@ done
 ;;
 
 ```
-Jadi untuk bisa memanggil scripth dengan argumen --check-tagihan saya membuat pengkondisian dengan if jika $1 yang artinya string yang diinput user setelah ./kost_slebew.sh merupakan --check-tagihan maka akan secara otomatis menginisialisai tgl_rekap lalu memberikan output berupa rekapan data penghuni yang pada tanggal tersebut masih menunggak lalu hasil rekapan tersebut dimasukkan ke __./log/tagihan.log__. Setelah itu saya membuat tampilah awal dari fitur ke 6 dengan menggunakan while loop agar selalu bisa terloop sampai user input 4. Lalu untuk pilihan satu program akan secara otomatis memanggil crontab -l dan menampilkan detail jadwal yang aktif atau peringatan tidak ada jadwal efektif jika tidak ada cron yang kita daftarkan. Selanjutnya jika user memilih opsi 2 maka program akan mencari alamat absolut dari scripth yang kita gunakan menggunakan _readlink_ lalu dimasukkan ke variabel SCRIPTH_PATH, lalu karena kita diminta untuk membuat agar jadwal cronnya hanya ada satu maka dari itu kita perlu mengoverwrite jadwal sebelumnya menggunakan _grep -v "SCRIPTH_PATH_" lalu baru memasukkan jadwal yang baru menggunakan echo. Jika user memilih opsi 3 progam akan menghapus semua daftar cron jobs yang kita miliki dengan kode _crontab -r_ dan memunculkan output bahwa kita berhasil menghapus jadwal cron jobs berwarna hijau 
+Jadi untuk bisa memanggil scripth dengan argumen --check-tagihan saya membuat pengkondisian dengan if jika $1 yang artinya string yang diinput user setelah ./kost_slebew.sh merupakan --check-tagihan maka akan secara otomatis menginisialisai tgl_rekap lalu memberikan output berupa rekapan data penghuni yang pada tanggal tersebut masih menunggak lalu hasil rekapan tersebut dimasukkan ke __./log/tagihan.log__. Setelah itu saya membuat tampilah awal dari fitur ke 6 dengan menggunakan while loop agar selalu bisa terloop sampai user input 4. Lalu untuk pilihan satu program akan secara otomatis memanggil crontab -l dan menampilkan detail jadwal yang aktif atau peringatan tidak ada jadwal efektif jika tidak ada cron yang kita daftarkan. Selanjutnya jika user memilih opsi 2 maka program akan mencari alamat absolut dari scripth yang kita gunakan menggunakan _readlink_ lalu dimasukkan ke variabel SCRIPTH_PATH, lalu karena kita diminta untuk membuat agar jadwal cronnya hanya ada satu maka dari itu kita perlu mengoverwrite jadwal sebelumnya menggunakan _grep -v "SCRIPTH_PATH_" lalu baru memasukkan jadwal yang baru menggunakan echo. Jika user memilih opsi 3 progam akan menghapus semua daftar cron jobs yang kita miliki dengan kode _crontab -r_ dan memunculkan output bahwa kita berhasil menghapus jadwal cron jobs berwarna hijau jika user memilih selain opsi 1-4 akan ada peringatan _Pilihan salah_ berwarna merah.
 
+Tampilan awal:
+
+![Tampilan awal fitur 6](<Assets/Soal_3/TampilanFitur6.png>)
+
+Opsi 1 (Lihat Cron Job Aktif):
+
+1[Output opsi 1](<Assets/Soal_3/Cronjobopsi1.png>)
+
+Opsi 2 (Daftarkan Cron Job Pengingat):
+
+![Output opsi 2](<Assets/Soal_3/Opsi2.png>)
+
+Opsi 3 (Hapus Cron Job Pengingat):
+
+![Output opsi 3](<Assets/Soal_3/Opsi3.png>)
