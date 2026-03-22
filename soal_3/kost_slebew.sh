@@ -206,7 +206,7 @@ case $pilihan in
 	echo "=============================================="
 	tgl_rekap=$(date "+%Y-%m-%d %H:%M")
 	echo "[$tgl_rekap] Pemasukan: $pemasukan,Tunggakan: $tunggakan,Terisi: $jumterisi" >> ./rekap/laporan_bulanan.txt
-	echo -e "\n\e[32m[✓] Laporan berhasil disimpan ke rekap ./zrekap/laporan_bulanan.txt\e[0m"
+	echo -e "\n\e[32m[✓] Laporan berhasil disimpan ke rekap ./rekap/laporan_bulanan.txt\e[0m"
 	fi
 	echo "Tekan [ENTER] untuk kembali ke menu"
         read # Menunggu user menekan enter
