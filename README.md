@@ -528,8 +528,110 @@ Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daf
 ![OutputFitur4]()
 
 **Fitur 5**
+Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan secara otomatis menghitung ketika ada penghuni yang memiliki status aktif akan masuk ke kategori pemasukan jika status penghuni menunggak akan secara otomatis masuk ke kategori tunggakan. 
 
+```bash
+5)
+	clear
+	echo "=============================================="
+    echo "         LAPORAN KEUANGAN KOST SLEBEW         "
+    echo "=============================================="
+	if [ ! -s ./data/penghuni.csv ]; then
+	echo -e "\e[31m[!] Data penghuni kosong!\e[0m"
+	else
+	pemasukan=$(awk -F "," '/Aktif/ {sum+=$4} END {print sum+0}' ./data/penghuni.csv)
+	tunggakan=$(awk -F "," '/Menunggak/ {sum+=$4} END {print sum+0}' ./data/penghuni.csv)
+	jumterisi=$(awk 'END {print NR}' ./data/penghuni.csv)
+	echo "Total pemasukan (Aktif)   : Rp$pemasukan"
+	echo "Total tunggakan           : Rp$tunggakan"
+	echo "Jumlah kamar terisi       : $jumterisi Kamar"
+	echo "-----------------------------------------------"
+	echo "Daftar penghuni menunggak: "
+	if [ $tunggakan -gt 0 ]; then
+	awk -F "," '$5 ~ /Menunggak/ {printf "%s     | %s |%s   | %s \n", $1, $2, $4, $5}' ./data/penghuni.csv | column -t -s "|" -o " | "
+	else
+	echo "--- Tidak ada tunggakan (SLEBEW!) ---"
+	fi
+	echo "=============================================="
+	tgl_rekap=$(date "+%Y-%m-%d %H:%M")
+	echo "[$tgl_rekap] Pemasukan: $pemasukan,Tunggakan: $tunggakan,Terisi: $jumterisi" >> ./rekap/laporan_bulanan.txt
+	echo -e "\n\e[32m[✓] Laporan berhasil disimpan ke rekap ./zrekap/laporan_bulanan.txt\e[0m"
+	fi
+	echo "Tekan [ENTER] untuk kembali ke menu"
+        read # Menunggu user menekan enter
+	
+;;
 
+```
+Di kode tersebut saya memulai dengan mengecek apakah data penghuni kosong atau tidak menggunakan if _-s_ jika kososng akan memberikan peringatan berwarna merah, setelah itu saya membuat variabel bernama pemasukan, tunggakan dan jumterisi, untuk variabel pemasukan dia akan mencari kata Aktif dan akan menjumlahkan kolom ke 4 yaitu harga sewa di baris yang terdapat kata aktif lalu hasilnya akan berupa jumlah pemasukan yang dimiliki paman amba setelah itu untuk variabel tunggakan kurang lebih sama dengan pemasukan yaitu mencari kata Menunggak di file penghuni.csv lalu menjumlahkan kolom ke 4 dari baris tersebut sehingga hasilnya berupa total jumlah tunggakan. Karena di fitur ke lima kita juga diminta untuk mencari tahu jumlah kamar terisi di situ saya mengunakan awk untuk menghitung baris dari file penghuni.csv yang akan secara otomatis menghitung jumlah kamar yang terisi juga karena satu penghuni hanya memiliki satu kamar. Selanjutnya saya juga menginisialisasi tanggal rekap tersebut menggunakan perintah date lalu saya gabungkan semua variabel tersebut ke dalam output rekap dan memasukkannya ke ./rekap/laporan_bulanan.txt.
+Hasilnya kurang lebih seperti ini:
 
+![]()
 
+**Fitur 6**
+Di fitur ke 6 ini kita diminta untuk membuat fitur yang dapat mengelola cron seperti mendaftarkan cron job lalu melihat daftar cron job dan terkahir menghapus cron job. Fitur ini harus bisa looping sehingga user dapat memilih opsi yang lain setelah melakukan opsi saat ini lalu untuk memanggil scripth juga perlu menggunakan argumen ./kost_slebew.sh --check-tagihan. Untuk melakukan semua tugas tersebut saya menggunakan tugas dibawah ini:
+
+```bash
+#!/bin/bash
+
+if [[ "$1" == "--check-tagihan" ]]; then 
+
+tgl_rekap=$(date "+%Y-%m-%d %H:%M")
+
+awk -F "," -v tgl="$tgl_rekap" '$5 ~ /Menunggak/ {
+	printf "[/%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' 
+./data/penghuni.csv >> ./log/tagihan.log
+
+exit 0
+
+fi
+
+6)
+	while true; do
+	clear
+
+	echo "===================================="
+	echo "          MENU KELOLA CRON          "
+	echo "===================================="
+	echo "1 | Lihat Cron Job Aktif"
+	echo "2 | Daftarkan Cron Job Pengingat"
+	echo "3 | Hapus Cron Job Pengingat"
+	echo "4 | Kembali"
+	echo "===================================="
+	echo "Enter option [1-4]: "
+	read pilihan
+
+	case $pilihan in
+1) 
+clear
+echo "--- Daftar Cron Jobs Pengingat Tagihan ---"
+crontab -l || echo -e "\e[31m[!] Tidak ada jadwal efektif!\e[0m"
+read -p "Tekan [ENTER] untuk kembali ke menu"
+;;
+2)
+	clear
+	#Mengambil alamat absolut
+	SCRIPTH_PATH=$(readlink -f "$0")
+	
+	#Sistem overwrite
+	read -p "Masukkan Jam (00-23): " jam_baru
+	read -p "Masukkan Menit (0-59): " menit_baru
+	(crontab -l 2>/dev/null | grep -v "$SCRIPTH_PATH"; echo "$menit_baru $jam_baru * * 1-7  $SCRIPTH_PATH --check-tagihan") | crontab -
+	echo -e "\e[32mJadwal berhasil didaftarkan!\e[0m" 	
+	read -p "Tekan [ENTER] untuk kembali ke menu"
+;;
+3) 
+	clear 
+	crontab -r
+	echo -e "\e[32m[✓] Cron job pengingat tagihan berhasil dihapus.\e[0m"
+	read -p "Tekan [ENTER] untuk kembali ke menu"
+;;
+4) break;;
+*) echo -e "\e[31mPilihan salah!\e[0m";;
+   esac	
+done
+;;
+
+```
+Jadi untuk bisa memanggil scripth dengan argumen --check-tagihan saya membuat pengkondisian dengan if jika $1 yang artinya string yang diinput user setelah ./kost_slebew.sh merupakan --check-tagihan maka akan secara otomatis menginisialisai tgl_rekap lalu memberikan output berupa rekapan data penghuni yang pada tanggal tersebut masih menunggak lalu hasil rekapan tersebut dimasukkan ke __./log/tagihan.log__. Setelah itu saya membuat tampilah awal dari fitur ke 6 dengan menggunakan while loop agar selalu bisa terloop sampai user input 4. Lalu untuk pilihan satu program akan secara otomatis memanggil crontab -l dan menampilkan detail jadwal yang aktif atau peringatan tidak ada jadwal efektif jika tidak ada cron yang kita daftarkan. Selanjutnya jika user memilih opsi 2 maka program akan mencari alamat absolut dari scripth yang kita gunakan menggunakan _readlink_ lalu dimasukkan ke variabel SCRIPTH_PATH, lalu karena kita diminta untuk membuat agar jadwal cronnya hanya ada satu maka dari itu kita perlu mengoverwrite jadwal sebelumnya menggunakan _grep -v "SCRIPTH_PATH_" lalu baru memasukkan jadwal yang baru menggunakan echo. Jika user memilih opsi 3 progam akan menghapus semua daftar cron jobs yang kita miliki dengan kode _crontab -r_ dan memunculkan output bahwa kita berhasil menghapus jadwal cron jobs berwarna hijau 
 
