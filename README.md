@@ -645,7 +645,7 @@ Tampilan awal:
 
 Opsi 1 (Lihat Cron Job Aktif):
 
-1[Output opsi 1](<Assets/Soal_3/Cronjobopsi1.png>)
+![Output opsi 1](<Assets/Soal_3/Opsi1.png>)
 
 Opsi 2 (Daftarkan Cron Job Pengingat):
 
