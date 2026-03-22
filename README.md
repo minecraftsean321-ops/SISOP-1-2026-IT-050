@@ -528,8 +528,41 @@ Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daf
 ![OutputFitur4]()
 
 **Fitur 5**
+Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan secara otomatis menghitung ketika ada penghuni yang memiliki status aktif akan masuk ke kategori pemasukan jika status penghuni menunggak akan secara otomatis masuk ke kategori tunggakan. 
 
+```bash
+5)
+	clear
+	echo "=============================================="
+    echo "         LAPORAN KEUANGAN KOST SLEBEW         "
+    echo "=============================================="
+	if [ ! -s ./data/penghuni.csv ]; then
+	echo -e "\e[31m[!] Data penghuni kosong!\e[0m"
+	else
+	pemasukan=$(awk -F "," '/Aktif/ {sum+=$4} END {print sum+0}' ./data/penghuni.csv)
+	tunggakan=$(awk -F "," '/Menunggak/ {sum+=$4} END {print sum+0}' ./data/penghuni.csv)
+	jumterisi=$(awk 'END {print NR}' ./data/penghuni.csv)
+	echo "Total pemasukan (Aktif)   : Rp$pemasukan"
+	echo "Total tunggakan           : Rp$tunggakan"
+	echo "Jumlah kamar terisi       : $jumterisi Kamar"
+	echo "-----------------------------------------------"
+	echo "Daftar penghuni menunggak: "
+	if [ $tunggakan -gt 0 ]; then
+	awk -F "," '$5 ~ /Menunggak/ {printf "%s     | %s |%s   | %s \n", $1, $2, $4, $5}' ./data/penghuni.csv | column -t -s "|" -o " | "
+	else
+	echo "--- Tidak ada tunggakan (SLEBEW!) ---"
+	fi
+	echo "=============================================="
+	tgl_rekap=$(date "+%Y-%m-%d %H:%M")
+	echo "[$tgl_rekap] Pemasukan: $pemasukan,Tunggakan: $tunggakan,Terisi: $jumterisi" >> ./rekap/laporan_bulanan.txt
+	echo -e "\n\e[32m[✓] Laporan berhasil disimpan ke rekap ./zrekap/laporan_bulanan.txt\e[0m"
+	fi
+	echo "Tekan [ENTER] untuk kembali ke menu"
+        read # Menunggu user menekan enter
+	
+;;
 
-
+```
+Di kode tersebut saya memulai dengan mengecek apakah data penghuni kosong atau tidak menggunakan if _-s_ jika kososng akan memberikan peringatan berwarna merah, setelah itu saya membuat variabel bernama pemsukan, tunggakan dan 
 
 
