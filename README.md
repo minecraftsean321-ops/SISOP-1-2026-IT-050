@@ -1,7 +1,7 @@
 # SISOP-1-2026-IT-050
-| No. | Nama                   | NRP             |
-|-----|------------------------|-----------------|
-| 1.  | Sean Arthur Tamajaya   | 5027251050      |
+| No. | Nama                   | NRP               |
+|-----|------------------------|-------------------|
+| 1.  | Sean Arthur Tamajaya   | 5027251050        |
 ## Reporting
 ### Soal_1
 
@@ -289,6 +289,8 @@ Outputnya akan menjadi seperti ini:
 
 ![Desain Text](<Assets/Soal_3/Kost_Slebew.png>)
 
+**Fitur 1**
+
 Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
 
 ```bash
@@ -404,6 +406,8 @@ Jika input salah:
 
 ![Salah](<Assets/Soal_3/JikaInputSalah.png>)
 
+**Fitur 2**
+
 Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya menggunakan kode dibawah ini:
 
 ```bash
@@ -457,6 +461,8 @@ Jadi diawal kode saya mengecek apakah inputan nama dari user ada dalam file peng
 Jika dibatalkan:
 
 ![Batal Hapus](<Assets/Soal_3/BatalHapus.png>)
+
+**Fitur 3**
 
 Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dengan bentuk tabel, yang kodenya seperti ini:
 
@@ -654,3 +660,6 @@ Opsi 2 (Daftarkan Cron Job Pengingat):
 Opsi 3 (Hapus Cron Job Pengingat):
 
 ![Output opsi 3](<Assets/Soal_3/Opsi3.png>)
+
+## Refrensi
+1. https://gemini.google.com/share/eaafa2c669f1
