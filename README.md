@@ -77,7 +77,7 @@ close(command)
 
 ```
 
-Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga terjadi duplikasi lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
+Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga bisa terjadi duplikasi, lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
 
 ![Output soal_1 b](<Assets/Soal_1/Output soal_1 b.png>)
 
@@ -102,7 +102,7 @@ print nama  " adalah penumpang tertua dengan usia " usia " tahun"
 close(command)
 
 ```
-Disitu saya membagi command menjadi dua yaitu comamnd_usia untuk mencari usia yang paling tua dan command_nama untuk mencari nama dari orang yang memiliki usia tertua. Jadi untuk command_usia perintah awk kan mengeprint kolom ke dua dari file passenger.csv dan mengurutkan usianya dari yang paling tinggi ke rendah menggunakan perintah sort -rn setelah itu saya mengambil output teratas yaitu angka tertinggi dengan kode head -1. Setelah saya dapat usia tertua saya dapat mencari nama dari orang yang memiliki usia tersebut dengan command_nama. Output dari kode tersebut adalah sebagai berikut:
+Disitu saya membagi command menjadi dua yaitu comamnd_usia untuk mencari usia yang paling tua dan command_nama untuk mencari nama dari orang yang memiliki usia tertua. Jadi untuk command_usia perintah awk akan mengeprint kolom ke dua dari file passenger.csv dan mengurutkan usianya dari yang paling tinggi ke rendah menggunakan perintah sort -rn setelah itu saya mengambil output teratas yaitu angka tertinggi dengan kode head -1. Setelah saya dapat usia tertua saya dapat mencari nama dari orang yang memiliki usia tersebut dengan command_nama. Output dari kode tersebut adalah sebagai berikut:
 
 ![Output soal_1 c](<Assets/Soal_1/Output soal_1 c.png>)
 
@@ -125,7 +125,7 @@ print "Rata rata usia penumpang adalah " rata " tahun"
 close(command)
 
 ```
-Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari usia penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _\".0f\\n"_. Output dari kode diatas adalah sebagai berikut:  
+Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _\".0f\\n"_. Output dari kode diatas adalah sebagai berikut:  
 
 ![Output soal_1 d](<Assets/Soal_1/Output soal_1 d.png>)
 
@@ -175,7 +175,7 @@ Hasil dari kode diatas adalah sebagai berikut:
 
 Penjelasan
 
-Untuk langkah pertama menyelesaikan Soal_2 kita perlu memyiapkan semua peralatan yang diperlukan yang pertama itu gdown kita bisa menggunakan kode dibawah ini: 
+Untuk langkah pertama menyelesaikan Soal_2 kita perlu menyiapkan semua peralatan yang diperlukan, yang pertama itu gdown kita bisa menggunakan kode dibawah ini: 
 
 ```console
 
@@ -232,7 +232,7 @@ sed -n '44,54p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {pr
 sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
 
 ```
-Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk, semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu kita bisa menggunakan perintah seperti ini _./parserkoordinat.sh gsxtrack.json > titik-penting.txt_ dan output dari kode tersebut adalah sebagai berikut:
+Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk. Semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu kita bisa menggunakan perintah seperti ini _./parserkoordinat.sh gsxtrack.json > titik-penting.txt_ dan output dari kode tersebut adalah sebagai berikut:
 
 ![Output kode di titik-penting](<Assets/Soal_2/Titikpenting.png>)
 
@@ -392,7 +392,7 @@ case $pilihan in
             ;;
 
 ```
-Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan terus mengeloop sampai user menginput angka 7 yaitu exit, di tampilan awal tersebut saya juga menggunakan text ascii menggunakan figlet dan lolcat seperti yang telah saya jelaskan diatas, untuk mendapatkan input dari user saya menggunakan perintah read -p karena selain saya bisa mendapat input dari user saya juga dapat mengeluarkan output secara bersamaan, untuk pengkondisian agar tidak ada nomor kamar yang sama saya menggunakan perintah grep -q lalu mengecek apakah ada nomor kamar yang sama seperti yang diinputkan oleh user di file penghuni.csv yang berfungsi sebagai database tempat menyimpan data-data dari penghuni kost. Lalu jika ternyata kamar telah terisi maka program akan secara otomatis memberi peringatan dengan warna teks merah karena saya menggunakan _\e[31m_. Untuk pengkondisian selanjutnya yaitu harga sewa harus positif saya menggunakan perintah if untuk mengecek apakah angka yang diinput oleh user melebihi 0 dan merupakan angka dari 1-9. Setelah itu untuk pengkondisian tanggal saya menggukan perintah bawaan dari linux yaitu date yang dapat mengecek format dari tanggal dan mengecek apakah tanggal melebihi hari ini. Setelah itu saya memasukkan data-data tadi kedalam file penghuni.csv dan menampilkan hasil dengan warna hijau.
+Jadi disitu saya membuat fitur looping dengan menggunakan while loop yang akan terus mengeloop sampai user menginput angka 7 yaitu exit, di tampilan awal tersebut saya juga menggunakan text ascii figlet dan lolcat seperti yang telah saya jelaskan diatas, untuk mendapatkan input dari user saya menggunakan perintah read -p karena selain saya bisa mendapat input dari user saya juga dapat mengeluarkan output secara bersamaan, untuk pengkondisian agar tidak ada nomor kamar yang sama saya menggunakan perintah grep -q lalu mengecek apakah ada nomor kamar yang sama seperti yang diinputkan oleh user di file penghuni.csv yang berfungsi sebagai database tempat menyimpan data-data dari penghuni kost. Lalu jika ternyata kamar telah terisi maka program akan secara otomatis memberi peringatan dengan warna teks merah karena saya menggunakan _\e[31m_. Untuk pengkondisian selanjutnya yaitu harga sewa harus positif saya menggunakan perintah if untuk mengecek apakah angka yang diinput oleh user melebihi 0 dan merupakan angka dari 1-9. Setelah itu untuk pengkondisian tanggal saya menggukan perintah bawaan dari linux yaitu date yang dapat mengecek format dari tanggal dan mengecek apakah tanggal melebihi hari ini. Setelah itu saya memasukkan data-data tadi kedalam file penghuni.csv dan menampilkan hasil dengan warna hijau.
 
 Output tampilan awal:
 
@@ -454,7 +454,7 @@ Lanjut untuk fitur kedua kita diminta untuk membuat fitur hapus penghuni, saya m
 
 
 ```
-Jadi diawal kode saya mengecek apakah inputan nama dari user ada dalam file penghuni.csv jika tidak ada maka akan diberi peringatan jika ada maka akan muncul _Namap penghuni ditemukan_ disitu saya juga menambahkan fitur two step verification dengan menyakan user apakah yakin ingin menghapus data penghuni tersebut. Dikode tersebut saya menyimpan semua data dari penghuni yang akan dihapus didalam variabel data_penghuni agar saya bisa menyimpannya di file history_hapus.csv sebelum itu saya juga sudah mencatat tanggal penghuni tersebut keluar dengan dengan perintah date. Selanjutnya saya menghapus data dari penghuni tersebut di file penghuni.csv menggunakan perintah sed jika berhasil akan keluar output berupa nama dari penghuni telah keluar tgl_keluar berwarna hijau. Outputnya kurang lebih seperti ini:
+Jadi diawal kode saya mengecek apakah inputan nama dari user ada dalam file penghuni.csv jika tidak ada maka akan diberi peringatan, jika ada maka akan muncul _Nama penghuni ditemukan_ disitu saya juga menambahkan fitur two step verification dengan menanyakan user apakah yakin ingin menghapus data penghuni tersebut. Dikode tersebut saya menyimpan semua data dari penghuni yang akan dihapus kedalam variabel data_penghuni agar saya bisa menyimpannya di file history_hapus.csv, sebelum itu saya juga sudah mencatat tanggal penghuni tersebut keluar dengan perintah date. Selanjutnya saya menghapus data dari penghuni tersebut di file penghuni.csv menggunakan perintah sed jika berhasil akan keluar output berupa nama dari penghuni telah keluar tgl_keluar berwarna hijau. Outputnya kurang lebih seperti ini:
 
 ![Berhasil Hapus](<Assets/Soal_3/BerhasilHapus.png>)
 
@@ -464,7 +464,7 @@ Jika dibatalkan:
 
 **Fitur 3**
 
-Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dengan bentuk tabel, yang kodenya seperti ini:
+Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dalam bentuk tabel, yang kodenya seperti ini:
 
 ```bash
 3)
@@ -488,7 +488,7 @@ Setelah itu ke fitur yang ke 3 yaitu menampilkan daftar penghuni dengan bentuk t
 
 ```
 
-Jadi di kode tersebut saya mengambil data-data yang ada di penghuni.csv menggunakan awk lalu menggabungkannya dengan pipe ke perintah column agar tabel akan secara otomatis mengikuti panjang data yang diambil dari file penghuni.csv. Setelah itu saya membuat variabel penghuni, Aktif dan Menunggak untuk menghitung total jumlah dari masing-masing aspek tersebut menggunakan awk, saya juga menggunakan warna hijau untuk output dari aktif dan warna merah untuk ouput dari menunggak. Output untuk kode tersebut adalah sebagai berikut:
+Jadi di kode tersebut saya mengambil data-data yang ada di penghuni.csv menggunakan awk lalu menggabungkannya dengan pipe ke perintah column agar tabel akan secara otomatis mengikuti panjang data yang diambil dari file penghuni.csv. Setelah itu saya membuat variabel penghuni, Aktif dan Menunggak untuk menghitung total jumlah dari masing-masing kategori tersebut menggunakan awk, saya juga menggunakan warna hijau untuk output dari aktif dan warna merah untuk ouput dari menunggak. Output untuk kode tersebut adalah sebagai berikut:
 
 ![Output fitur 3](<Assets/Soal_3/OutputFitur3.png>)
 
@@ -529,7 +529,7 @@ Untuk fitur ke 4 kita diminta untuk membuat sebuah fitur yang dapat merubah stat
 
 ```
 
-Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daftar penghuni.csv jika ada maka saya akan menampilkan data yang dimiliki oleh nama tersebut menggunakan perintah awk, setelah itu saya menggunakan perintah sed untuk mengubah yang awalnya Menunggak menjadi Aktif dan yang awalnya Aktif dapat menjadi Menunggak dengan pengkondisian if, jika inputan dari user tidak sesuai maka akan muncul peringatan Input Status Salah dan jika nama yang user inputan tidak ada di file penghuni.csv maka akan muncul peringatan juga yang berbunyi Nama Penghuni Tidak Ditemukan. Output dari kode diatas adalah sebagai berikut:
+Jadi diawal kode tersebut saya mengecek apakah inputan nama dari user ada di daftar penghuni.csv jika ada maka saya akan menampilkan data yang dimiliki oleh nama tersebut dalam bentuk tabel menggunakan perintah awk, setelah itu saya menggunakan perintah sed untuk mengubah yang awalnya Menunggak menjadi Aktif dan yang awalnya Aktif dapat menjadi Menunggak dengan pengkondisian if, jika inputan dari user tidak sesuai maka akan muncul peringatan __Input Status Salah__ dan jika nama yang user inputan tidak ada di file penghuni.csv maka akan muncul peringatan juga yang berbunyi __Nama Penghuni Tidak Ditemukan__. Output dari kode diatas adalah sebagai berikut:
 
 ![OutputFitur4](<Assets/Soal_3/Outputfitur4b.png>)
 
@@ -538,7 +538,7 @@ Jika salah:
 ![Output4jikasalah](<Assets/Soal_3/Outputfitur4l.png>)
 
 **Fitur 5**
-Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan secara otomatis menghitung ketika ada penghuni yang memiliki status aktif akan masuk ke kategori pemasukan jika status penghuni menunggak akan secara otomatis masuk ke kategori tunggakan. 
+Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan secara otomatis menghitung ketika ada penghuni yang memiliki status aktif akan masuk ke kategori pemasukan, jika status penghuni menunggak akan secara otomatis masuk ke kategori tunggakan. 
 
 ```bash
 5)
@@ -573,7 +573,7 @@ Di fitur 5 ini kita diminta untuk membuat rekap keuangan, jadi fitur ini akan se
 ;;
 
 ```
-Di kode tersebut saya memulai dengan mengecek apakah data penghuni kosong atau tidak menggunakan if _-s_ jika kososng akan memberikan peringatan berwarna merah, setelah itu saya membuat variabel bernama pemasukan, tunggakan dan jumterisi, untuk variabel pemasukan dia akan mencari kata Aktif dan akan menjumlahkan kolom ke 4 yaitu harga sewa di baris yang terdapat kata aktif lalu hasilnya akan berupa jumlah pemasukan yang dimiliki paman amba setelah itu untuk variabel tunggakan kurang lebih sama dengan pemasukan yaitu mencari kata Menunggak di file penghuni.csv lalu menjumlahkan kolom ke 4 dari baris tersebut sehingga hasilnya berupa total jumlah tunggakan. Karena di fitur ke lima kita juga diminta untuk mencari tahu jumlah kamar terisi di situ saya mengunakan awk untuk menghitung baris dari file penghuni.csv yang akan secara otomatis menghitung jumlah kamar yang terisi juga karena satu penghuni hanya memiliki satu kamar. Selanjutnya saya juga menginisialisasi tanggal rekap tersebut menggunakan perintah date lalu saya gabungkan semua variabel tersebut ke dalam output rekap dan memasukkannya ke ./rekap/laporan_bulanan.txt.
+Di kode tersebut saya memulai dengan mengecek apakah data penghuni kosong atau tidak menggunakan if _-s_ jika kososng akan memberikan peringatan berwarna merah, setelah itu saya membuat variabel bernama pemasukan, tunggakan dan jumterisi, untuk variabel pemasukan dia akan mencari kata Aktif dan akan menjumlahkan kolom ke 4 yaitu harga sewa di baris yang terdapat kata aktif lalu hasilnya akan berupa jumlah pemasukan yang dimiliki paman amba, setelah itu untuk variabel tunggakan kurang lebih sama dengan pemasukan yaitu mencari kata Menunggak di file penghuni.csv lalu menjumlahkan kolom ke 4 dari baris tersebut sehingga hasilnya berupa total jumlah tunggakan. Karena di fitur ke lima kita juga diminta untuk mencari tahu jumlah kamar teris,i di situ saya mengunakan awk untuk menghitung baris dari file penghuni.csv yang akan secara otomatis menghitung jumlah kamar yang terisi juga karena satu penghuni hanya memiliki satu kamar. Selanjutnya saya juga menginisialisasi tanggal rekap tersebut menggunakan perintah date lalu saya gabungkan semua variabel tersebut ke dalam output rekap dan memasukkannya ke ./rekap/laporan_bulanan.txt.
 Hasilnya kurang lebih seperti ini:
 
 ![Output Fitur 5](<Assets/Soal_3/Outputfitur5.png>)
@@ -643,7 +643,7 @@ done
 ;;
 
 ```
-Jadi untuk bisa memanggil scripth dengan argumen --check-tagihan saya membuat pengkondisian dengan if jika $1 yang artinya string yang diinput user setelah ./kost_slebew.sh merupakan --check-tagihan maka akan secara otomatis menginisialisai tgl_rekap lalu memberikan output berupa rekapan data penghuni yang pada tanggal tersebut masih menunggak lalu hasil rekapan tersebut dimasukkan ke __./log/tagihan.log__. Setelah itu saya membuat tampilah awal dari fitur ke 6 dengan menggunakan while loop agar selalu bisa terloop sampai user input 4. Lalu untuk pilihan satu program akan secara otomatis memanggil crontab -l dan menampilkan detail jadwal yang aktif atau peringatan tidak ada jadwal efektif jika tidak ada cron yang kita daftarkan. Selanjutnya jika user memilih opsi 2 maka program akan mencari alamat absolut dari scripth yang kita gunakan menggunakan _readlink_ lalu dimasukkan ke variabel SCRIPTH_PATH, lalu karena kita diminta untuk membuat agar jadwal cronnya hanya ada satu maka dari itu kita perlu mengoverwrite jadwal sebelumnya menggunakan _grep -v "SCRIPTH_PATH_" lalu baru memasukkan jadwal yang baru menggunakan echo. Jika user memilih opsi 3 progam akan menghapus semua daftar cron jobs yang kita miliki dengan kode _crontab -r_ dan memunculkan output bahwa kita berhasil menghapus jadwal cron jobs berwarna hijau jika user memilih selain opsi 1-4 akan ada peringatan _Pilihan salah_ berwarna merah.
+Jadi untuk bisa memanggil scripth dengan argumen --check-tagihan saya membuat pengkondisian dengan if jika $1 yang artinya string yang diinput user setelah ./kost_slebew.sh merupakan --check-tagihan maka akan secara otomatis menginisialisai tgl_rekap lalu memberikan output berupa rekapan data penghuni yang pada tanggal tersebut masih menunggak lalu hasil rekapan tersebut dimasukkan ke __./log/tagihan.log__ kode ini saya letakkan di paling atas setelah _#!/bin/bash_. Setelah itu saya membuat tampilah awal dari fitur ke 6 dengan menggunakan while loop agar selalu bisa terloop sampai user input 4. Lalu untuk pilihan satu program akan secara otomatis memanggil crontab -l dan menampilkan detail jadwal yang aktif atau peringatan tidak ada jadwal efektif jika tidak ada cron yang kita daftarkan. Selanjutnya jika user memilih opsi 2 maka program akan mencari alamat absolut dari scripth yang kita gunakan menggunakan _readlink_ lalu dimasukkan ke variabel SCRIPTH_PATH, lalu karena kita diminta untuk membuat agar jadwal cronnya hanya ada satu maka dari itu kita perlu mengoverwrite jadwal sebelumnya menggunakan _grep -v "SCRIPTH_PATH_" lalu baru memasukkan jadwal yang baru menggunakan echo. Jika user memilih opsi 3 progam akan menghapus semua daftar cron jobs yang kita miliki dengan kode _crontab -r_ dan memunculkan output bahwa kita berhasil menghapus jadwal cron jobs berwarna hijau jika user memilih selain opsi 1-4 akan ada peringatan _Pilihan salah_ berwarna merah.
 
 Tampilan awal:
 
