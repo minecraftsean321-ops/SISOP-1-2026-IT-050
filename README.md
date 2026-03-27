@@ -578,7 +578,7 @@ Hasilnya kurang lebih seperti ini:
 
 ![Output Fitur 5](<Assets/Soal_3/Outputfitur5.png>)
 
-**Fitur 6**
+**Fitur 6**  
 Di fitur ke 6 ini kita diminta untuk membuat fitur yang dapat mengelola cron seperti mendaftarkan cron job lalu melihat daftar cron job dan terkahir menghapus cron job. Fitur ini harus bisa looping sehingga user dapat memilih opsi yang lain setelah melakukan opsi saat ini lalu untuk memanggil scripth juga perlu menggunakan argumen ./kost_slebew.sh --check-tagihan. Untuk melakukan semua tugas tersebut saya menggunakan tugas dibawah ini:
 
 ```bash
