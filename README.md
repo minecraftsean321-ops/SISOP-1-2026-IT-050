@@ -114,7 +114,7 @@ Di soal_1 d kita disuruh untuk menghitung rata-rata dari usia penumpang yang ada
 
 } else if (subsoal == "d") {
 
-command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%.0f\\n\", sum/count}' passenger.csv"
+command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%d\", int(sum/count)}' passenger.csv"
 
 if((command | getline rata) > 0) {
 
@@ -125,7 +125,7 @@ print "Rata rata usia penumpang adalah " rata " tahun"
 close(command)
 
 ```
-Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _\".0f\\n"_. Output dari kode diatas adalah sebagai berikut:  
+Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _int(sum/count)_. Output dari kode diatas adalah sebagai berikut:  
 
 ![Output soal_1 d](<Assets/Soal_1/Output soal_1 d.png>)
 
