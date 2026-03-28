@@ -238,7 +238,7 @@ sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {pr
 ```
 Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk. Semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu saya membungkus semua kode diatas dengan {} lalu diakhir saya beri perintah _tee_ agar program dapat mengoutput hasil kode sekaligus memasukkan outputnya ke file titik-penting.txt dan output dari kode tersebut adalah sebagai berikut:
 
-![Output kode di titik-penting](<Assets/Soal_2/Titikpenting.png>)
+![Output kode di titik-penting](<Assets/Soal_2/TitikPenting.png>)
 
 Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung titik tengah dari koordinat yang telah kita dapatkan, hal ini bisa dilakukan dengan menggunakan metode titik simetri diagonal, yaitu menghitung titik tengah dari dua koordinat yang saling berseberangan. Disini saya membuat file scripth lagi bernama _nemupusaka.sh_ yang memiliki kode seperti dibawah ini:
 
@@ -267,7 +267,7 @@ echo "($pusatx, $pusaty)"
 ```
 Jadi di kode tersebut saya mengambil variabel x dan y dari titik 1 dan 4 di file titik-penting.txt menggunakan perintah AWK, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 dan saya menggunakan perintah tee untuk memasukkan output dari program tersebut ke posisipusaka.txt. Sehingga hasilnya akan seperti ini:
 
-![Output nemupusaka](<Assets/Soal_2/Nemupusaka.png>)
+![Output nemupusaka](<Assets/Soal_2/NemuPusaka.png>)
 
 ### Soal_3
 
