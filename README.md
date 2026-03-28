@@ -114,7 +114,7 @@ Di soal_1 d kita disuruh untuk menghitung rata-rata dari usia penumpang yang ada
 
 } else if (subsoal == "d") {
 
-command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%.0f\\n\", sum/count}' passenger.csv"
+command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%d\", int(sum/count)}' passenger.csv"
 
 if((command | getline rata) > 0) {
 
@@ -125,7 +125,7 @@ print "Rata rata usia penumpang adalah " rata " tahun"
 close(command)
 
 ```
-Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _\".0f\\n"_. Output dari kode diatas adalah sebagai berikut:  
+Jadi di kode tersebut perintah awk menjumlahkan seluruh isi dari kolom 2 kecuali header karena ada pengkondisian _NR > 1_ dengan kode _sum += $2_ setelah itu dihitung juga jumlah baris dari tabel tersebut dengan kode _count++_ sehingga kita tahu jumlah dari penumpang di kereta tersebut dan dapat mencari rata-rata dengan membagi _sum/count_ lalu tidak lupa agar output bukan angka desimal saya menggunakan _int(sum/count)_. Output dari kode diatas adalah sebagai berikut:  
 
 ![Output soal_1 d](<Assets/Soal_1/Output soal_1 d.png>)
 
@@ -217,22 +217,26 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
+{
+
 FILE_JSON=$1
 
 #untuk node 001
-sed -n '12,22p' "$FILE_JSON" | awk -F ":" ' {gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+sed -n '12,22p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
 
 #untuk node 002
-sed -n '28,38p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+sed -n '28,38p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}' 
 
 #untuk node 003
-sed -n '44,54p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+sed -n '44,54p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}' 
 
 #untuk node 004
-sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}'
+sed -n '60,70p' "$FILE_JSON" | awk -F ":" '{gsub (/[", ]/, "", $2) } NR == 3 {printf "%s,", $2} NR == 5 {printf "%s,", $2} NR == 7 {printf "%s,", $2} NR == 8 {printf "%s\n", $2}' 
+
+} | tee -a titik-penting.txt
 
 ```
-Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk. Semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu kita bisa menggunakan perintah seperti ini _./parserkoordinat.sh gsxtrack.json > titik-penting.txt_ dan output dari kode tersebut adalah sebagai berikut:
+Jadi di kode tersebut if akan mengecek apakah string setelah nama file.sh itu kosong atau tidak menggunakan _[ -z "$1" ]_ jika kosong maka user akan diberi tutorial cara penggunaan dari file.sh tersebut. Disitu saya menggunakan sed untuk mengambil bagian yang berisi data-data yang diperlukan, saya menghitung untuk data pertama yaitu node 001 itu berada di baris 12 - 22, setelah saya mengambil bagian yang penting itu saya pisahkan lagi site_nama, latitude, dan longitude dengan menggunakan awk. Semua data yang ada di file tersebut memiliki penempatan yang sama yaitu site_nama berada di baris ke 3, latitude berada di baris ke 5 dan longitude berada di baris ke 7 sehingga di semua kode untuk node 002-004 itu pada bagian awk memiliki kode yang sama. Yang membedakan hanyalah perintah sed karena mereka berada di baris yang berbeda dalam file.json. Lalu saya membungkus semua kode diatas dengan {} lalu diakhir saya beri perintah _tee_ agar program dapat mengoutput hasil kode sekaligus memasukkan outputnya ke file titik-penting.txt dan output dari kode tersebut adalah sebagai berikut:
 
 ![Output kode di titik-penting](<Assets/Soal_2/Titikpenting.png>)
 
@@ -241,32 +245,29 @@ Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung 
 ```bash
 #!/bin/bash
 
-x1=-7.920000
-y1=112.450000
+
+{
+
+x1=$(awk -F "," 'NR == 1 {print $3}' titik-penting.txt)
+y1=$(awk -F "," 'NR == 1 {print $4}' titik-penting.txt)
 
 
-x4=-7.937960
-y4=112.450000
+x4=$(awk -F "," 'NR == 4 {print $3}' titik-penting.txt)
+y4=$(awk -F "," 'NR == 4 {print $4}' titik-penting.txt)
 
-
-pusatx=$(echo "scale=6;  ($x1 + $x4) / 2" | bc )
+pusatx=$(echo "scale=6; ($x1 + $x4) / 2" | bc )
 pusaty=$(echo "scale=6; ($y1 + $y4) / 2" | bc )
+
 
 echo "Koordinat pusat: "
 echo "($pusatx, $pusaty)"
 
+} | tee -a posisipusaka.txt
+
 ```
-Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 berdasarkan koordinat yang kita peroleh dari step sebelumnya, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
+Jadi di kode tersebut saya mengambil variabel x dan y dari titik 1 dan 4 di file titik-penting.txt menggunakan perintah AWK, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 dan saya menggunakan perintah tee untuk memasukkan output dari program tersebut ke posisipusaka.txt. Sehingga hasilnya akan seperti ini:
 
 ![Output nemupusaka](<Assets/Soal_2/Nemupusaka.png>)
-
-Lalu masukkan output tersebut ke file baru bernama posisipusaka.txt dengan kode dibawah ini:
-
-```console
-
-seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi/peta-gunung-kawi$ ./nemupusaka.sh > posisipusaka.txt
-
-```
 
 ### Soal_3
 
@@ -289,6 +290,24 @@ Outputnya akan menjadi seperti ini:
 
 ![Desain Text](<Assets/Soal_3/Kost_Slebew.png>)
 
+**Menambahkan folder dan file yang dibutuhkan**
+
+```bash
+#!/bin/bash
+
+mkdir -p data
+touch ./data/penghuni.csv
+mkdir  -p log
+touch ./log/tagihan.log
+mkdir -p rekap
+touch ./rekap/laporan_bulanan.txt
+mkdir -p sampah
+touch ./sampah/history_hapus.csv
+
+```
+
+Di kode tersebut saya ingin membuat folder dan file yang diperlukan di program ini dengan otomatis, saya menggunakan perintah mkdir -p agar kode tidak error saat folder telah dibuat.
+
 **Fitur 1**
 
 Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
@@ -296,13 +315,21 @@ Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menamb
 ```bash
 #!/bin/bash
 
+mkdir -p data
+touch ./data/penghuni.csv
+mkdir  -p log
+touch ./log/tagihan.log
+mkdir -p rekap
+touch ./rekap/laporan_bulanan.txt
+mkdir -p sampah
+touch ./sampah/history_hapus.csv
+
 if [[ "$1" == "--check-tagihan" ]]; then 
 
 tgl_rekap=$(date "+%Y-%m-%d %H:%M")
 
 awk -F "," -v tgl="$tgl_rekap" '$5 ~ /Menunggak/ {
-	printf "[/%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' 
-./data/penghuni.csv >> ./log/tagihan.log
+	printf "[%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' ./data/penghuni.csv | tee -a ./log/tagihan.log
 
 exit 0
 
@@ -330,9 +357,9 @@ read pilihan
 
 case $pilihan in
 1)
-    clear
+        clear
 	echo "===================================="
-    echo "        TAMBAH PENGHUNI BARU        "
+        echo "        TAMBAH PENGHUNI BARU        "
 	echo "===================================="
         read -p "Masukkan Nama: " nama
 
@@ -589,8 +616,7 @@ if [[ "$1" == "--check-tagihan" ]]; then
 tgl_rekap=$(date "+%Y-%m-%d %H:%M")
 
 awk -F "," -v tgl="$tgl_rekap" '$5 ~ /Menunggak/ {
-	printf "[/%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' 
-./data/penghuni.csv >> ./log/tagihan.log
+	printf "[%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' ./data/penghuni.csv | tee -a ./log/tagihan.log
 
 exit 0
 
@@ -660,6 +686,10 @@ Opsi 2 (Daftarkan Cron Job Pengingat):
 Opsi 3 (Hapus Cron Job Pengingat):
 
 ![Output opsi 3](<Assets/Soal_3/Opsi3.png>)
+
+**Output --check-tagihan**  
+
+![Output --check-tagihan](<Assets/Soal_3/CheckTagihan.png>)
 
 ## Refrensi
 1. https://gemini.google.com/share/eaafa2c669f1
