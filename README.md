@@ -245,32 +245,29 @@ Setelah itu kita lanjut untuk mencari titik pusaka paman kita dengan menghitung 
 ```bash
 #!/bin/bash
 
-x1=-7.920000
-y1=112.450000
+
+{
+
+x1=$(awk -F "," 'NR == 1 {print $3}' titik-penting.txt)
+y1=$(awk -F "," 'NR == 1 {print $4}' titik-penting.txt)
 
 
-x4=-7.937960
-y4=112.450000
+x4=$(awk -F "," 'NR == 4 {print $3}' titik-penting.txt)
+y4=$(awk -F "," 'NR == 4 {print $4}' titik-penting.txt)
 
-
-pusatx=$(echo "scale=6;  ($x1 + $x4) / 2" | bc )
+pusatx=$(echo "scale=6; ($x1 + $x4) / 2" | bc )
 pusaty=$(echo "scale=6; ($y1 + $y4) / 2" | bc )
+
 
 echo "Koordinat pusat: "
 echo "($pusatx, $pusaty)"
 
+} | tee -a posisipusaka.txt
+
 ```
-Jadi di kode tersebut saya membuat variabel x dan y dari titik 1 dan 4 berdasarkan koordinat yang kita peroleh dari step sebelumnya, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 sehingga hasilnya akan muncul seperti ini:
+Jadi di kode tersebut saya mengambil variabel x dan y dari titik 1 dan 4 di file titik-penting.txt menggunakan perintah AWK, lalu menjumlahkan x1 + x4 / 2 dan y1 + y4 /2 dan saya menggunakan perintah tee untuk memasukkan output dari program tersebut ke posisipusaka.txt. Sehingga hasilnya akan seperti ini:
 
 ![Output nemupusaka](<Assets/Soal_2/Nemupusaka.png>)
-
-Lalu masukkan output tersebut ke file baru bernama posisipusaka.txt dengan kode dibawah ini:
-
-```console
-
-seanarthur17@tamam~/SISOP-1-2026-IT-050/soal_2/ekspedsi/peta-gunung-kawi$ ./nemupusaka.sh > posisipusaka.txt
-
-```
 
 ### Soal_3
 
