@@ -652,7 +652,7 @@ read -p "Tekan [ENTER] untuk kembali ke menu"
 	#Sistem overwrite
 	read -p "Masukkan Jam (00-23): " jam_baru
 	read -p "Masukkan Menit (0-59): " menit_baru
-	(crontab -l 2>/dev/null | grep -v "$SCRIPTH_PATH"; echo "$menit_baru $jam_baru * * 1-7  $SCRIPTH_PATH --check-tagihan") | crontab -
+	(crontab -l 2>/dev/null | grep -v "$SCRIPTH_PATH"; echo "$menit_baru $jam_baru * * *  $SCRIPTH_PATH --check-tagihan") | crontab -
 	echo -e "\e[32mJadwal berhasil didaftarkan!\e[0m" 	
 	read -p "Tekan [ENTER] untuk kembali ke menu"
 ;;
