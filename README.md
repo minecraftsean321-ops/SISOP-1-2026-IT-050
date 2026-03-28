@@ -290,6 +290,24 @@ Outputnya akan menjadi seperti ini:
 
 ![Desain Text](<Assets/Soal_3/Kost_Slebew.png>)
 
+**Menambahkan folder dan file yang dibutuhkan**
+
+```bash
+#!/bin/bash
+
+mkdir -p data
+touch ./data/penghuni.csv
+mkdir  -p log
+touch ./log/tagihan.log
+mkdir -p rekap
+touch ./rekap/laporan_bulanan.txt
+mkdir -p sampah
+touch ./sampah/history_hapus.csv
+
+```
+
+Di kode tersebut saya ingin membuat folder dan file yang diperlukan di program ini dengan otomatis, saya menggunakan perintah mkdir -p agar kode tidak error saat folder telah dibuat.
+
 **Fitur 1**
 
 Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
