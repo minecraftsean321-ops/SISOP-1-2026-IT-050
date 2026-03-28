@@ -308,8 +308,6 @@ touch ./sampah/history_hapus.csv
 
 Di kode tersebut saya ingin membuat folder dan file yang diperlukan di program ini dengan otomatis, saya menggunakan perintah mkdir -p agar kode tidak error saat folder telah dibuat.
 
-![Output]
-
 **Fitur 1**
 
 Lalu untuk fitur yang pertama kita diminta untuk membuat fitur yang dapat menambah penghuni dengan memasukkan inputan berupa nama, kamar, harga sewa, tanggal masuk dan status. Inputan tersebut memiliki syarat sebagai berikut format tanggal tidak boleh salah yaitu (YYYY-MM--DD), tanggal tidak boleh melebihi hari ini, harga sewa harus angka positif dan nomor kamar tidak boleh ada yang sama. Pertama saya membuat file scripth bernama kost_slebew.sh lalu saya menggunakan kode dibawah ini:
@@ -689,9 +687,9 @@ Opsi 3 (Hapus Cron Job Pengingat):
 
 ![Output opsi 3](<Assets/Soal_3/Opsi3.png>)
 
-**Output --check-tagihan**
+**Output --check-tagihan**  
 
-![Output --check-tagihan](<Assets/Soal_3/>)
+![Output --check-tagihan](<Assets/Soal_3/CheckTagihan.png>)
 
 ## Refrensi
 1. https://gemini.google.com/share/eaafa2c669f1
