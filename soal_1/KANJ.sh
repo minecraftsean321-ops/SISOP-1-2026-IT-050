@@ -22,8 +22,8 @@ print "Jumlah seluruh penumpang KANJ adalah "count" orang"
 close(command)
 
 } else if (subsoal == "b") {
-
-command="awk -F \",\" 'NR > 1 {print $4}' passenger.csv | sort | uniq | wc -l"
+#tr -d '\r' digunakan untuk menghapus karakter tak terlihat
+command="awk -F \",\" ' NR > 1 {print $4}' passenger.csv | tr -d '\r' | sort | uniq | wc -l"
 
 if((command | getline count) > 0) {
 
@@ -49,7 +49,7 @@ close(command)
 
 } else if (subsoal == "d") {
 
-command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%.0f\\n\", sum/count}' passenger.csv"
+command="awk -F \",\" 'NR > 1 {sum += $2; count++} END {printf \"%d\", int(sum/count)}' passenger.csv"
 
 if((command | getline rata) > 0) {
 

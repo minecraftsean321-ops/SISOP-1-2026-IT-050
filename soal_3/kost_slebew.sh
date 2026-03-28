@@ -1,12 +1,20 @@
 #!/bin/bash
 
+mkdir -p data
+touch ./data/penghuni.csv
+mkdir  -p log
+touch ./log/tagihan.log
+mkdir -p rekap
+touch ./rekap/laporan_bulanan.txt
+mkdir -p sampah
+touch ./sampah/history_hapus.csv
+
 if [[ "$1" == "--check-tagihan" ]]; then 
 
 tgl_rekap=$(date "+%Y-%m-%d %H:%M")
 
 awk -F "," -v tgl="$tgl_rekap" '$5 ~ /Menunggak/ {
-	printf "[/%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' 
-./data/penghuni.csv >> ./log/tagihan.log
+	printf "[%s] TAGIHAN: <%s>, (Kamar <%s>) - Menunggak Rp<%s>\n", tgl , $1 , $2 , $4}' ./data/penghuni.csv | tee -a ./log/tagihan.log
 
 exit 0
 
@@ -242,7 +250,7 @@ read -p "Tekan [ENTER] untuk kembali ke menu"
 	#Sistem overwrite
 	read -p "Masukkan Jam (00-23): " jam_baru
 	read -p "Masukkan Menit (0-59): " menit_baru
-	(crontab -l 2>/dev/null | grep -v "$SCRIPTH_PATH"; echo "$menit_baru $jam_baru * * 1-7  $SCRIPTH_PATH --check-tagihan") | crontab -
+	(crontab -l 2>/dev/null | grep -v "$SCRIPTH_PATH"; echo "$menit_baru $jam_baru * * *  $SCRIPTH_PATH --check-tagihan") | crontab -
 	echo -e "\e[32mJadwal berhasil didaftarkan!\e[0m" 	
 	read -p "Tekan [ENTER] untuk kembali ke menu"
 ;;
