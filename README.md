@@ -64,8 +64,8 @@ Lanjut ke soal b kita disuruh untuk menghitung jumlah gerbong yang ada di kereta
 ```bash
 
 } else if (subsoal == "b") {
-
-command="awk -F \",\" 'NR > 1 {print $4}' passenger.csv | sort | uniq | wc -l"
+#tr -d '\r' digunakan untuk menghapus karakter tak terlihat
+command="awk -F \",\" ' NR > 1 {print $4}' passenger.csv | tr -d '\r' | sort | uniq | wc -l"
 
 if((command | getline count) > 0) {
 
@@ -73,11 +73,11 @@ print "Jumlah gerbong penumpang KANJ adalah "count""
 
 }
 
-close(command)
+close(command
 
 ```
 
-Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga bisa terjadi duplikasi, lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
+Kode tersebut mengeprint kolom ke 4 dari file passenger.csv dengan pengkondisian baris lebih dari satu agar header tidak ikut terprint seperti kode di soal a, dan menyortir nama gerbong yang unik karena suatu gerbong bisa ditempati oleh banyak orang sehingga bisa terjadi duplikasi, sebelum itu saya juga telah menghapus karakter tersembunyi menggunakan _tr -d '\r'_ agar tidak ikut terhitung, lalu dihitung jumlah dari nama gerbong yang unik dengan wc -l. Output dari kode tersebut adalah sebagai berikut:
 
 ![Output soal_1 b](<Assets/Soal_1/Output soal_1 b.png>)
 
